@@ -3,12 +3,20 @@
         Забыли пароль?
     </x-slot>
 
-    <div class="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex flex-col justify-center px-4 sm:px-6 py-8 sm:py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white shadow-lg rounded-lg p-8">
-                <div class="text-center mb-8">
-                    <h1 class="text-2xl font-bold text-gray-900">Забыли пароль?</h1>
-                    <p class="mt-2 text-sm text-gray-600">
+            <!-- Логотип/Заголовок -->
+            <div class="text-center mb-8">
+                <a href="{{ route('home') }}" class="inline-block mb-4">
+                    <span class="text-3xl sm:text-4xl font-bold text-orange-600">Cry build</span>
+                </a>
+                <p class="text-gray-600 text-sm sm:text-base">Восстановление пароля</p>
+            </div>
+
+            <div class="bg-white shadow-xl rounded-lg p-6 sm:p-8">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Забыли пароль?</h1>
+                    <p class="mt-3 text-sm text-gray-600">
                         Введите свой email, и мы отправим вам ссылку для сброса пароля
                     </p>
                 </div>
@@ -34,8 +42,8 @@
                     </x-primary-button>
 
                     <div class="mt-6 text-center">
-                        <a class="text-sm text-gray-600 underline hover:text-orange-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('login') }}">
-                            Вернуться на страницу входа
+                        <a class="text-sm text-orange-600 font-medium hover:text-orange-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('login') }}">
+                            ← Вернуться на страницу входа
                         </a>
                     </div>
                 </form>

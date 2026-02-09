@@ -3,22 +3,19 @@
         Вход в личный кабинет
     </x-slot>
 
-    <div class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex flex-col justify-center px-4 sm:px-6 py-8 sm:py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <!-- Логотип/Заголовок -->
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-full mb-4">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                </div>
-                <h1 class="text-3xl font-bold text-gray-900">OBI</h1>
-                <p class="mt-2 text-gray-600">Ваш личный кабинет</p>
+                <a href="{{ route('home') }}" class="inline-block mb-4">
+                    <span class="text-3xl sm:text-4xl font-bold text-orange-600">Cry build</span>
+                </a>
+                <p class="text-gray-600 text-sm sm:text-base">Ваш личный кабинет</p>
             </div>
 
-            <div class="bg-white shadow-xl rounded-lg p-8">
-                <div class="mb-8">
-                    <h2 class="text-2xl font-bold text-gray-900 text-center">Вход</h2>
+            <div class="bg-white shadow-xl rounded-lg p-6 sm:p-8">
+                <div class="mb-6 sm:mb-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center">Вход</h2>
                     <p class="mt-2 text-sm text-gray-600 text-center">
                         Введите свои данные для входа в аккаунт
                     </p>
@@ -43,14 +40,14 @@
                         <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
                     </div>
 
-                    <div class="flex items-center justify-between">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <label class="flex items-center">
                             <input type="checkbox" name="remember" id="remember" class="rounded border-gray-300 text-orange-600 shadow-sm focus:ring-orange-500">
                             <span class="ml-2 text-sm text-gray-600">Запомнить меня</span>
                         </label>
 
                         @if (Route::has('password.request'))
-                            <a class="text-sm text-gray-600 underline hover:text-orange-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('password.request') }}">
+                            <a class="text-sm text-gray-600 hover:text-orange-600 underline rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('password.request') }}">
                                 Забыли пароль?
                             </a>
                         @endif
@@ -63,9 +60,12 @@
                     </x-primary-button>
 
                     <div class="mt-6 text-center">
-                        <a class="text-sm text-gray-600 underline hover:text-orange-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('register') }}">
-                            Нет аккаунта? Зарегистрироваться
-                        </a>
+                        <p class="text-sm text-gray-600">
+                            Нет аккаунта?
+                            <a class="text-orange-600 font-medium hover:text-orange-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" href="{{ route('register') }}">
+                                Зарегистрироваться
+                            </a>
+                        </p>
                     </div>
                 </form>
             </div>
