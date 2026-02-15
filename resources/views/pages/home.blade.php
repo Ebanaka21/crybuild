@@ -5,13 +5,13 @@
 @section('content')
 
 {{-- Основной отступ всей страницы --}}
-<div class="space-y-16 pb-16">
+<div class="space-y-8 sm:space-y-12 md:space-y-16 pb-8 sm:pb-12 md:pb-16">
 
     <!-- БАННЕРЫ (Оставляем как было, работает хорошо) -->
     @if(isset($banners) && $banners->count() > 0)
         <section class="relative group">
-            <div class="container mx-auto px-4 mt-6">
-                <div class="relative overflow-hidden rounded-2xl shadow-xl bg-gray-100 h-64 sm:h-80 md:h-125" id="hero-slider">
+            <div class="container mx-auto px-3 sm:px-4 mt-3 sm:mt-6">
+                <div class="relative overflow-hidden rounded-lg sm:rounded-2xl shadow-lg sm:shadow-xl bg-gray-100 h-56 sm:h-80 md:h-125" id="hero-slider">
                     @foreach($banners as $index => $banner)
                         <div class="banner-slide absolute inset-0 transition-opacity duration-700 ease-in-out {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}"
                              data-slide="{{ $index }}">
@@ -25,20 +25,20 @@
 
                             @if($banner->title || $banner->description)
                                 <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
-                                    <div class="max-w-3xl px-8 md:px-16 text-white">
+                                    <div class="max-w-3xl px-4 sm:px-8 md:px-16 text-white">
                                         @if($banner->title)
-                                            <h2 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-lg tracking-tight">
+                                            <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-3 sm:mb-6 leading-tight drop-shadow-lg tracking-tight">
                                                 {{ $banner->title }}
                                             </h2>
                                         @endif
                                         @if($banner->description)
-                                            <p class="text-lg md:text-xl mb-8 opacity-90 font-light max-w-xl leading-relaxed">
+                                            <p class="text-sm sm:text-lg md:text-xl mb-4 sm:mb-8 opacity-90 font-light max-w-xl leading-relaxed">
                                                 {{ $banner->description }}
                                             </p>
                                         @endif
                                         @if($banner->button_text && $banner->button_url)
                                             <a href="{{ $banner->button_url }}"
-                                               class="inline-block bg-orange-600 text-white hover:bg-orange-700 font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg hover:-translate-y-1 transform">
+                                               class="inline-block bg-orange-600 text-white hover:bg-orange-700 font-bold px-4 sm:px-8 py-2 sm:py-4 text-sm sm:text-base rounded-lg transition duration-300 shadow-lg hover:-translate-y-1 transform">
                                                 {{ $banner->button_text }}
                                             </a>
                                         @endif
@@ -49,7 +49,7 @@
                     @endforeach
 
                     @if($banners->count() > 1)
-                        <div class="absolute bottom-8 left-8 md:left-16 flex gap-3 z-20">
+                        <div class="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 md:left-16 flex gap-2 sm:gap-3 z-20">
                             @foreach($banners as $index => $banner)
                                 <button onclick="setSlide({{ $index }})"
                                         class="banner-dot h-2 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-orange-500 w-8' : 'bg-white/50 w-2 hover:bg-white' }}"
@@ -62,18 +62,18 @@
         </section>
     @endif
 
-    <div class="container mx-auto px-4 space-y-16">
+    <div class="container mx-auto px-3 sm:px-4 space-y-8 sm:space-y-12 md:space-y-16">
 
         <!-- АКЦИИ -->
         @if(isset($promotions) && $promotions->count() > 0)
             <section x-data="promotionsSlider({{ $promotions->count() }})" x-init="init()">
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-4 leading-none">
+                <div class="flex items-center justify-between mb-4 sm:mb-8">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                         Горячие акции
                     </h2>
-                    <a href="{{ route('promotions.index') }}" class="hidden md:block text-gray-500 hover:text-orange-600 font-medium transition flex items-center group">
+                    <a href="{{ route('promotions.index') }}" class="hidden md:flex text-xs sm:text-sm text-gray-500 hover:text-orange-600 font-medium transition items-center group">
                         Все акции
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
 
@@ -92,18 +92,18 @@
                                         <div class="absolute top-4 left-4 z-10 bg-red-600 text-white px-3 py-1 rounded font-bold shadow-md text-sm">
                                             -{{ $promotion->discount_type === 'percent' ? $promotion->discount_value . '%' : number_format($promotion->discount_value, 0, ',', ' ') . ' ₽' }}
                                         </div>
-                                        <div class="h-48 md:h-56 overflow-hidden relative">
+                                        <div class="h-40 sm:h-48 md:h-56 overflow-hidden relative">
                                             @if($promotion->image)
                                                 <img src="{{ asset('storage/' . $promotion->image) }}" alt="{{ $promotion->name }}" class="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-500" draggable="false">
                                             @else
                                                 <div class="w-full h-full bg-gray-200"></div>
                                             @endif
-                                            <div class="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black/60 to-transparent">
+                                            <div class="absolute bottom-0 left-0 w-full p-2 sm:p-3 bg-gradient-to-t from-black/60 to-transparent">
                                                 <p class="text-white text-xs font-medium">До {{ $promotion->end_date->format('d.m.Y') }}</p>
                                             </div>
                                         </div>
-                                        <div class="p-4">
-                                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">{{ $promotion->name }}</h3>
+                                        <div class="p-3 sm:p-4">
+                                            <h3 class="text-base sm:text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors line-clamp-2">{{ $promotion->name }}</h3>
                                         </div>
                                     </a>
                                 </div>
@@ -134,20 +134,20 @@
                                         <div class="absolute top-4 left-4 z-10 bg-red-600 text-white px-3 py-1 rounded font-bold shadow-md text-sm">
                                             -{{ $promotion->discount_type === 'percent' ? $promotion->discount_value . '%' : number_format($promotion->discount_value, 0, ',', ' ') . ' ₽' }}
                                         </div>
-                                        <div class="h-56 md:h-64 overflow-hidden relative">
+                                        <div class="h-48 sm:h-56 md:h-64 overflow-hidden relative">
                                             @if($promotion->image)
                                                 <img src="{{ asset('storage/' . $promotion->image) }}" alt="{{ $promotion->name }}" class="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-500">
                                             @else
                                                 <div class="w-full h-full bg-gray-200"></div>
                                             @endif
-                                            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent">
-                                                <p class="text-white text-sm font-medium">Действует до {{ $promotion->end_date->format('d.m.Y') }}</p>
+                                            <div class="absolute bottom-0 left-0 w-full p-3 sm:p-4 bg-gradient-to-t from-black/60 to-transparent">
+                                                <p class="text-white text-xs sm:text-sm font-medium">Действует до {{ $promotion->end_date->format('d.m.Y') }}</p>
                                             </div>
                                         </div>
-                                        <div class="p-6 flex flex-col flex-grow">
-                                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">{{ $promotion->name }}</h3>
+                                        <div class="p-4 sm:p-6 flex flex-col flex-grow">
+                                            <h3 class="text-base sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2">{{ $promotion->name }}</h3>
                                             @if($promotion->description)
-                                                <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">{{ $promotion->description }}</p>
+                                                <p class="text-gray-500 text-xs sm:text-sm line-clamp-2 leading-relaxed">{{ $promotion->description }}</p>
                                             @endif
                                         </div>
                                     </a>
@@ -179,16 +179,16 @@
         <!-- ХИТЫ ПРОДАЖ -->
         @if(isset($featuredProducts) && $featuredProducts->count() > 0)
             <section>
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-4 leading-none">
+                <div class="flex items-center justify-between mb-4 sm:mb-8">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                         Хиты продаж
                     </h2>
-                    <a href="{{ route('catalog.index') }}" class="text-gray-500 hover:text-orange-600 font-medium transition flex items-center group">
+                    <a href="{{ route('catalog.index') }}" class="text-xs sm:text-sm text-gray-500 hover:text-orange-600 font-medium transition hidden sm:flex items-center group">
                         В каталог
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
                     @foreach($featuredProducts as $product)
                         <x-product-card :product="$product" />
                     @endforeach
@@ -199,16 +199,16 @@
         <!-- НОВИНКИ -->
         @if(isset($newProducts) && $newProducts->count() > 0)
             <section>
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-4 leading-none">
+                <div class="flex items-center justify-between mb-4 sm:mb-8">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                         Новинки
                     </h2>
-                    <a href="{{ route('catalog.index') }}" class="text-gray-500 hover:text-orange-600 font-medium transition flex items-center group">
+                    <a href="{{ route('catalog.index') }}" class="text-xs sm:text-sm text-gray-500 hover:text-orange-600 font-medium transition hidden sm:flex items-center group">
                         Смотреть все
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-4 md:gap-6">
                     @foreach($newProducts as $product)
                         <x-product-card :product="$product" />
                     @endforeach
@@ -219,32 +219,32 @@
         <!-- КАТЕГОРИИ (ИСПРАВЛЕНО: Белые плитки, никаких серых шаров) -->
         @if(isset($categories) && $categories->count() > 0)
             <section>
-                <h2 class="text-3xl font-bold text-gray-900 mb-8 border-l-4 border-orange-600 pl-4 leading-none">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                     Популярные категории
                 </h2>
 
                 {{-- Сетка плиток --}}
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
                     @foreach($categories->take(12) as $category)
                         <a href="{{ route('catalog.category', $category->slug) }}"
-                           class="group flex flex-col items-center justify-between p-6 bg-white border border-gray-200 rounded-xl hover:border-orange-500 hover:shadow-lg transition-all duration-300 h-full">
+                           class="group flex flex-col items-center justify-between p-3 sm:p-6 bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-orange-500 hover:shadow-lg transition-all duration-300 h-full">
 
                             {{-- Контейнер для иконки/картинки --}}
-                            <div class="w-full h-24 mb-4 flex items-center justify-center">
+                            <div class="w-full h-16 sm:h-24 mb-2 sm:mb-4 flex items-center justify-center">
                                 @if($category->image)
                                     <img src="{{ asset('storage/' . $category->image) }}"
                                          alt="{{ $category->name }}"
                                          class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300">
                                 @else
                                     {{-- Если картинки нет - аккуратная SVG иконка "коробки/категории" --}}
-                                    <svg class="w-12 h-12 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                                     </svg>
                                 @endif
                             </div>
 
                             {{-- Название категории --}}
-                            <h3 class="text-sm md:text-base font-bold text-gray-800 text-center leading-tight group-hover:text-orange-600 transition-colors">
+                            <h3 class="text-xs sm:text-sm md:text-base font-bold text-gray-800 text-center leading-tight group-hover:text-orange-600 transition-colors line-clamp-2">
                                 {{ $category->name }}
                             </h3>
                         </a>
@@ -255,20 +255,20 @@
 
         <!-- БРЕНДЫ -->
         @if(isset($brands) && $brands->count() > 0)
-            <section class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-4 leading-none">
+            <section class="bg-gray-50 rounded-lg sm:rounded-2xl p-4 sm:p-8 border border-gray-100">
+                <div class="flex items-center justify-between mb-4 sm:mb-8">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                         Бренды
                     </h2>
-                    <a href="{{ route('brands.index') }}" class="text-gray-500 hover:text-orange-600 font-medium transition flex items-center group">
+                    <a href="{{ route('brands.index') }}" class="text-xs sm:text-sm text-gray-500 hover:text-orange-600 font-medium transition hidden sm:flex items-center group">
                         Все бренды
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-6 md:gap-8">
                     @foreach($brands->take(6) as $brand)
                         <a href="{{ route('catalog.brand', $brand->slug) }}"
-                           class="bg-white rounded-lg p-4 flex items-center justify-center h-24 shadow-sm hover:shadow-md transition-all duration-300 group opacity-70 hover:opacity-100">
+                           class="bg-white rounded-lg p-2 sm:p-4 flex items-center justify-center h-20 sm:h-24 shadow-sm hover:shadow-md transition-all duration-300 group opacity-70 hover:opacity-100">
                             @if($brand->logo)
                                 <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}" class="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300">
                             @else
@@ -284,31 +284,31 @@
         <!-- БЛОГ -->
         @if(isset($articles) && $articles->count() > 0)
             <section>
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-4 leading-none">
+                <div class="flex items-center justify-between mb-4 sm:mb-8">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 border-l-4 border-orange-600 pl-2 sm:pl-4 leading-none">
                         Идеи и советы
                     </h2>
-                    <a href="{{ route('blog.index') }}" class="text-gray-500 hover:text-orange-600 font-medium transition flex items-center group">
+                    <a href="{{ route('blog.index') }}" class="text-xs sm:text-sm text-gray-500 hover:text-orange-600 font-medium transition hidden sm:flex items-center group">
                         Журнал
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     @foreach($articles->take(3) as $article)
                         <a href="{{ route('blog.show', $article->slug) }}" class="group block h-full flex flex-col">
-                            <div class="bg-gray-100 rounded-xl overflow-hidden mb-4 relative aspect-video shadow-sm group-hover:shadow-lg transition-all duration-300">
+                            <div class="bg-gray-100 rounded-lg sm:rounded-xl overflow-hidden mb-3 sm:mb-4 relative aspect-video shadow-sm group-hover:shadow-lg transition-all duration-300">
                                 @if($article->image)
                                     <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 @else
                                     <div class="w-full h-full bg-gray-200"></div>
                                 @endif
                             </div>
-                            <div class="flex-grow">
-                                <h3 class="font-bold text-lg text-gray-900 mb-2 group-hover:text-orange-600 transition-colors leading-tight">
+                            <div class="grow">
+                                <h3 class="font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2 group-hover:text-orange-600 transition-colors leading-tight line-clamp-2">
                                     {{ $article->title }}
                                 </h3>
                                 @if($article->excerpt)
-                                    <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">{{ $article->excerpt }}</p>
+                                    <p class="text-gray-500 text-xs sm:text-sm line-clamp-2 leading-relaxed">{{ $article->excerpt }}</p>
                                 @endif
                             </div>
                         </a>

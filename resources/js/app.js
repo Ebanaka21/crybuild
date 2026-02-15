@@ -11,6 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Обработчики для переключения изображений в галерее товара
+    document.querySelectorAll('[data-product-image]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const src = this.getAttribute('data-product-image');
+            console.log('Button clicked, src:', src);
+            changeMainImage(src);
+        });
+    });
+
     // Инициализация слайдера баннеров
     initBannerSlider();
 });
@@ -42,7 +52,10 @@ window.showNotification = function(message, type = 'success') {
 // Функции для работы с товарами на странице
 window.changeMainImage = function(src) {
     const mainImage = document.getElementById('mainImage');
-    if (mainImage) mainImage.src = src;
+    if (mainImage) {
+        mainImage.src = src;
+        mainImage.style.opacity = '1';
+    }
 };
 
 window.incrementQuantity = function() {

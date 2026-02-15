@@ -7,7 +7,7 @@
     <title>@yield('title', config('app.name'))</title>
     
     <!-- Tailwind CSS -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Livewire Styles -->
     @livewireStyles
